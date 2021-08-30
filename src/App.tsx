@@ -1,5 +1,10 @@
+import { Router } from "components/Router";
 function App() {
-  return <div>App</div>;
+  return (
+    <div>
+      <Router />
+    </div>
+  );
 }
 
 export default App;
