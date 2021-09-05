@@ -1,5 +1,5 @@
-import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { Login } from "pages";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 export const Router = () => {
   return (

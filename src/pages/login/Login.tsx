@@ -1,3 +1,9 @@
+import Form from "./Form";
+
 export const Login = () => {
-  return <p>Login</p>;
+  return (
+    <>
+      <Form />
+    </>
+  );
 };
