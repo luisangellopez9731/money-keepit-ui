@@ -21,7 +21,14 @@ export const useAutoForm = (params: useAutoFormParams) => {
       [fieldName]: { ...fields[fieldName], ...data },
     }));
   };
-  return { fields, setField };
+
+  const getValues = () => {
+    return Object.entries(fields).reduce(
+      (acc, [name, field]) => ({ ...acc, [name]: field.value }),
+      {}
+    ) as any;
+  };
+  return { fields, setField, getValues };
 };
 
 export type useAutoFormResult = ReturnType<typeof useAutoForm>;
