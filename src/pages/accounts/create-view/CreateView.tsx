@@ -17,8 +17,17 @@ export const CreateView = () => {
       },
       amount: {
         type: "number",
-        value: '0',
+        value: "0",
         label: "Initial Amount",
+      },
+      type: {
+        type: "select",
+        options: [
+          { text: "Income", value: "income" },
+          { text: "Expense", value: "expense" },
+        ],
+        value: "income",
+        label: "Type",
       },
     },
   });

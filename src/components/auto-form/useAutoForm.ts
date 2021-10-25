@@ -20,7 +20,8 @@ export type FieldType =
   | "text"
   | "time"
   | "url"
-  | "week";
+  | "week"
+  | "select";
 
 export interface Field {
   value: string;
@@ -28,6 +29,7 @@ export interface Field {
   type: FieldType;
   autoFocus?: boolean;
   placeholder?: string;
+  options?: { text: string; value: string | number }[];
 }
 
 export interface useAutoFormParams {
