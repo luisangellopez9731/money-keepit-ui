@@ -1,6 +1,6 @@
-import { CrudView } from "components/auto-crud";
+// import { CrudView } from "components/auto-crud";
 import { Card } from "components/card";
-import { AutoForm, useAutoForm } from "components/auto-form";
+import { AutoForm, useAutoForm, CrudView, Header } from "components";
 
 export const CreateView = () => {
   const form = useAutoForm({
@@ -37,8 +37,9 @@ export const CreateView = () => {
     console.log(form.getValues());
   };
   return (
-    <CrudView title="Create Account">
+    <CrudView title="">
       <Card>
+        <Header>Create Account</Header>
         <AutoForm form={form} onSubmit={onSubmit} />
       </Card>{" "}
     </CrudView>
