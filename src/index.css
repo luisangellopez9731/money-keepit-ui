@@ -10,4 +10,6 @@ body {
     rgba(5, 175, 121, 1) 35%,
     rgba(4, 154, 107, 1) 100%
   );
+
+  font-family: "Poppins", sans-serif;
 }
