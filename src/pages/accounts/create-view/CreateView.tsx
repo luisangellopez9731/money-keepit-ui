@@ -9,6 +9,7 @@ export const CreateView = () => {
         type: "text",
         value: "",
         label: "Name",
+        autoFocus: true,
       },
       description: {
         type: "text",
@@ -31,10 +32,14 @@ export const CreateView = () => {
       },
     },
   });
+
+  const onSubmit = () => {
+    console.log(form.getValues());
+  };
   return (
     <CrudView title="Create Account">
       <Card>
-        <AutoForm form={form} />
+        <AutoForm form={form} onSubmit={onSubmit} />
       </Card>{" "}
     </CrudView>
   );
