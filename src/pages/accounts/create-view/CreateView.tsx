@@ -1,4 +1,3 @@
-// import { CrudView } from "components/auto-crud";
 import { Card } from "components/card";
 import { AutoForm, useAutoForm, CrudView, Header } from "components";
 
