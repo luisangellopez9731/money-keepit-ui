@@ -36,11 +36,8 @@ export const CreateView = () => {
     console.log(form.getValues());
   };
   return (
-    <CrudView title="">
-      <Card>
-        <Header>Create Account</Header>
-        <AutoForm form={form} onSubmit={onSubmit} />
-      </Card>{" "}
+    <CrudView title="Create Account">
+      <AutoForm form={form} onSubmit={onSubmit} />
     </CrudView>
   );
 };

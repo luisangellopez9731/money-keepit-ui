@@ -1,21 +1,17 @@
 import { FC } from "react";
+import { Header } from "components";
 
 export interface CrudViewProps {
   title: React.ReactNode;
 }
 
 export const CrudView: FC<CrudViewProps> = ({ title, children }) => {
-  const Title =
-    typeof title == "string" ? (
-      <h3 className="text-3xl p-4 text-white">{title}</h3>
-    ) : (
-      title
-    );
+  const Title = typeof title == "string" ? <Header>{title}</Header> : title;
   return (
-    <div className="flex flex-col h-full">
-      <div className="header mb-4 mt-4">{Title}</div>
+    <div className="flex flex-col h-full w-full">
+      <div className="header">{Title}</div>
 
-      <div className="body flex-1">{children}</div>
+      <div className="body flex-1 overflow-auto">{children}</div>
     </div>
   );
 };
