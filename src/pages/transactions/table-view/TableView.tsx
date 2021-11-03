@@ -1,8 +1,7 @@
 import { FC } from "react";
-
-import { TableViewProps, CrudView } from "components/auto-crud";
-import { TransactionList } from "./TransactionList";
 import { Transaction } from "models";
+import { TransactionList } from "./transaction-list";
+import { TableViewProps, CrudView } from "components/auto-crud";
 
 export const TableView: FC<TableViewProps> = ({ data }) => {
   return (

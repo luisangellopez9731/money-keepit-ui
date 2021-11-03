@@ -1,10 +1,6 @@
 import { FC } from "react";
-import { Transaction } from "models";
+import { Transaction as ITransaction } from "models";
 import { Icon } from "components";
-
-export interface TransactionListProps {
-  transactions: Transaction[];
-}
 
 function getDateFormated(date: string) {
   const date_ = new Date(date);
@@ -24,7 +20,7 @@ function getMoneyFormated(money: number) {
   return formatter.format(money);
 }
 
-const TransactionComp: FC<Transaction> = ({
+export const Transaction: FC<ITransaction> = ({
   description,
   date,
   amount,
@@ -52,17 +48,5 @@ const TransactionComp: FC<Transaction> = ({
         <p className={`${color} font-bold`}>{getMoneyFormated(amount)}</p>
       </div>
     </div>
-  );
-};
-
-export const TransactionList: FC<TransactionListProps> = ({ transactions }) => {
-  return (
-    <>
-      <div className="relative w-full">
-        {transactions.map((tr) => (
-          <TransactionComp {...tr} key={tr.id} />
-        ))}
-      </div>
-    </>
   );
 };
