@@ -30,12 +30,17 @@ const TransactionComp: FC<Transaction> = ({
   amount,
   type,
   categoryIcon,
+  categoryColor,
 }) => {
   const color = `text-${type === "income" ? "green" : "red"}-500`;
   return (
     <div className="w-full flex my-2 border-b-2 pb-2">
-      <div className="flex justify-center items-center p-2">
-        <Icon name={categoryIcon} />
+      <div className={`flex justify-center items-center p-2`}>
+        <div
+          className={`flex justify-center items-center p-2 bg-${categoryColor} rounded-full`}
+        >
+          <Icon name={categoryIcon} />
+        </div>
       </div>
       <div className="flex-1">
         <p className="">{description}</p>

@@ -9,4 +9,5 @@ export default class Transaction extends BaseRecord {
   description: string;
   type: "income" | "expense";
   categoryIcon: IconType;
+  categoryColor: string;
 }

@@ -23,7 +23,7 @@ const generateAccounts = () => {
 const generateCategories = () => {
   const result = [];
 
-  for (var i = 0; i < 100; i++) {
+  for (var i = 0; i < 20; i++) {
     result.push({
       id: faker.datatype.uuid(),
       name: faker.name.jobTitle(),
@@ -46,6 +46,17 @@ const generateCategories = () => {
         "sync_alt",
         "more_vert",
       ]),
+      color:
+        faker.random.arrayElement([
+          "red",
+          "green",
+          "yellow",
+          "purple",
+          "blue",
+          "gray",
+        ]) +
+        "-" +
+        faker.random.arrayElement(["300", "400", "500", "600", "700", "800"]),
       createdDate: faker.date.between(
         new Date("2015-12-17T03:24:00"),
         new Date()
@@ -74,6 +85,7 @@ const generateTransactions = (accounts, categories) => {
       categoryId: category.id,
       accountId,
       categoryIcon: category.icon,
+      categoryColor: category.color,
       date: faker.date.between(new Date("2015-12-17T03:24:00"), new Date()),
       createdDate: faker.date.between(
         new Date("2015-12-17T03:24:00"),
