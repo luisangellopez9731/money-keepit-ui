@@ -23,7 +23,7 @@ const Link = ({ icon, linkTo, text, showText }: LinkProps) => {
 
 export const Nabvar = () => {
   const [showText, setShowText] = useState(true);
-  const navBarRef = useRef<HTMLHeadingElement>(null);
+  const navBarRef = useRef<HTMLDivElement>(null);
 
   const setShowTextByWidth = () => {
     if (navBarRef.current) {
