@@ -42,7 +42,7 @@
     "build": "craco build",
     "test": "craco test",
     "eject": "react-scripts eject",
-    "dev": "concurrently \"json-server --port 3001 json-server/index.js\" \"yarn start\""
+    "dev": "concurrently \"npx json-server --watch --port 3001 json-server/index.js\" \"yarn start\""
   },
   "eslintConfig": {
     "extends": [

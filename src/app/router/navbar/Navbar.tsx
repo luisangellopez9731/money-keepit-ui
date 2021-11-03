@@ -2,6 +2,7 @@ import { links, Link as ILink } from "./links";
 import { useResize } from "commons/custom-hooks";
 import { Link as LinkComponent } from "react-router-dom";
 import { useState, useLayoutEffect, useRef } from "react";
+import { Icon } from "components";
 
 interface LinkProps extends ILink {
   showText: boolean;
@@ -14,7 +15,7 @@ const Link = ({ icon, linkTo, text, showText }: LinkProps) => {
         to={linkTo}
         className="flex flex-col justify-center items-center p-4"
       >
-        <span className="material-icons">{icon}</span>
+        <Icon name={icon as any} />
         {showText && <p className="text-sm">{text}</p>}
       </LinkComponent>
     </>

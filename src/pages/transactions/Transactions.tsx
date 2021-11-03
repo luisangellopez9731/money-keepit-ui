@@ -3,10 +3,10 @@ import { TableView } from "./table-view";
 import { CreateView } from "./create-view";
 import { Transaction } from "models";
 
-export const Accounts = () => {
+export const Transactions = () => {
   return (
-    <AutoCrud
-      serviceName="accounts"
+    <AutoCrud<Transaction>
+      serviceName="transactions"
       TableView={TableView}
       CreateView={CreateView}
       EditView={() => <p>Edit</p>}

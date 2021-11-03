@@ -1,19 +1,30 @@
-import { FC } from "react";
+import { FC, useContext, createContext, useEffect } from "react";
 import { Route, Switch, useRouteMatch } from "react-router-dom";
+import { useQuery, UseQueryResult } from "react-query";
 
-export interface AutoCrudProps {
+export type TableViewProps = UseQueryResult;
+
+export interface AutoCrudProps<T> {
   EditView: FC;
-  TableView: FC;
+  TableView: FC<TableViewProps>;
   CreateView: FC;
+  serviceName: string;
 }
 
-export const AutoCrud: FC<AutoCrudProps> = ({
+const AutoCrudContext = createContext({});
+
+export const AutoCrud = <T,>({
   TableView,
   CreateView,
   EditView,
-}) => {
+  serviceName,
+}: AutoCrudProps<T>) => {
+  const result = useQuery<T[], Error>(serviceName, () =>
+    fetch(`${process.env.REACT_APP_BACKEND_URL}${serviceName}`).then((res) =>
+      res.json()
+    )
+  );
   const { path: basePath } = useRouteMatch();
-  console.log(basePath);
   return (
     <Switch>
       <Route path={`${basePath}/create`}>
@@ -23,7 +34,7 @@ export const AutoCrud: FC<AutoCrudProps> = ({
         <EditView />
       </Route>
       <Route path={`${basePath}`}>
-        <TableView />
+        <TableView {...result} />
       </Route>
     </Switch>
   );
