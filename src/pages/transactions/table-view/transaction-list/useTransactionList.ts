@@ -1,34 +1,34 @@
 import { Transaction } from "core/models";
 
+export type TransactionPerDay = {
+  date: string;
+  total: number;
+  transactions: Transaction[];
+};
+
 export const useTransactionList = (transactions: Transaction[]) => {
-  const transactionsPerDay = transactions.reduce<
-    { date: string; transactions: Transaction[]; total: number }[]
-  >((acc, current) => {
-    const currentDate = new Date(current.date);
-    const currentDateData = {
-      year: currentDate.getUTCFullYear(),
-      day: currentDate.getDate(),
-      month: currentDate.getMonth(),
-    };
-    const index = acc.findIndex(
-      (transactions) =>
-        transactions.date ===
-        `${currentDateData.year}-${currentDateData.month}-${currentDateData.day}`
-    );
-    if (index === -1) {
-      acc.push({
-        date: `${currentDateData.year}-${currentDateData.month}-${currentDateData.day}`,
-        transactions: [current],
-        total: current.amount * (current.type === "expense" ? -1 : 1),
-      });
-    } else {
-      acc[index].transactions.push(current);
-      acc[index].total =
-        current.amount * (current.type === "expense" ? -1 : 1) +
-        acc[index].total;
-    }
-    return acc;
-  }, []);
+  const transactionsPerDay = transactions.reduce<TransactionPerDay[]>(
+    (acc, current) => {
+      const currentDate = new Date(current.date);
+      const amount = current.amount * (current.type === "expense" ? -1 : 1);
+      const transactionPDIndex = acc.findIndex(
+        ({ date }) => date === dateString
+      );
+      const dateString = `${currentDate.getFullYear()}-${currentDate.getMonth()}-${currentDate.getDate()}`;
+      if (transactionPDIndex === -1) {
+        acc.push({
+          total: amount,
+          date: dateString,
+          transactions: [current],
+        });
+      } else {
+        acc[transactionPDIndex].transactions.push(current);
+        acc[transactionPDIndex].total = amount + acc[transactionPDIndex].total;
+      }
+      return acc;
+    },
+    []
+  );
 
   return transactionsPerDay;
 };
