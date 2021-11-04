@@ -1,5 +1,5 @@
 export class TransactionFormatter {
-  static getDateFormated(date: string) {
+  static getDateFormatted(date: string) {
     const date_ = new Date(date);
     const hours = date_.getHours();
     const minutes = date_.getMinutes();
@@ -8,7 +8,7 @@ export class TransactionFormatter {
     }${minutes}`;
   }
 
-  static getMoneyFormated(money: number) {
+  static getMoneyFormatted(money: number) {
     const formatter = new Intl.NumberFormat("en-US", {
       style: "currency",
       currency: "USD",

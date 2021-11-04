@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { Icon } from "components";
-import { TransactionFormatter } from "utils";
+import { TransactionFormatter } from "core/utils";
 import { Transaction as ITransaction } from "core/models";
 
 export const Transaction: FC<ITransaction> = ({
@@ -13,25 +13,25 @@ export const Transaction: FC<ITransaction> = ({
 }) => {
   const color = `text-${type === "income" ? "green" : "red"}-500`;
   return (
-    <div className="w-full flex my-2 border-b-2 pb-2">
-      <div className={`flex justify-center items-center p-2`}>
+    <tr className="w-full">
+      <td className={`justify-center items-center p-2`}>
         <div
           className={`flex justify-center items-center p-2 bg-${categoryColor} rounded-full`}
         >
           <Icon name={categoryIcon} />
         </div>
-      </div>
-      <div className="flex-1">
+      </td>
+      <td className="w-full py-4">
         <p className="">{description}</p>
         <p className="text-sm text-gray-400">
-          {TransactionFormatter.getDateFormated(date.toString())}
+          {TransactionFormatter.getDateFormatted(date.toString())}
         </p>
-      </div>
-      <div>
-        <p className={`${color} font-bold`}>
-          {TransactionFormatter.getMoneyFormated(amount)}
+      </td>
+      <td>
+        <p className={`${color} font-bold text-right pr-2`}>
+          {TransactionFormatter.getMoneyFormatted(amount)}
         </p>
-      </div>
-    </div>
+      </td>
+    </tr>
   );
 };

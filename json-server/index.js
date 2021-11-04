@@ -86,7 +86,7 @@ const generateTransactions = (accounts, categories) => {
       accountId,
       categoryIcon: category.icon,
       categoryColor: category.color,
-      date: faker.date.between(new Date("2015-12-17T03:24:00"), new Date()),
+      date: faker.date.between(new Date("2020-12-17T03:24:00"), new Date()),
       createdDate: faker.date.between(
         new Date("2015-12-17T03:24:00"),
         new Date()
@@ -94,7 +94,7 @@ const generateTransactions = (accounts, categories) => {
     });
   }
 
-  return result;
+  return result.sort((a, b) => b.date - a.date);
 };
 
 const accounts = generateAccounts();
