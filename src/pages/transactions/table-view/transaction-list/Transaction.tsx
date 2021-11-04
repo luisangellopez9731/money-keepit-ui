@@ -1,24 +1,7 @@
 import { FC } from "react";
-import { Transaction as ITransaction } from "models";
 import { Icon } from "components";
-
-function getDateFormated(date: string) {
-  const date_ = new Date(date);
-  const hours = date_.getHours();
-  const minutes = date_.getMinutes();
-  return `${hours < 10 ? "0" : ""}${hours}:${
-    minutes < 10 ? "0" : ""
-  }${minutes}`;
-}
-
-function getMoneyFormated(money: number) {
-  const formatter = new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD",
-  });
-
-  return formatter.format(money);
-}
+import { TransactionFormatter } from "utils";
+import { Transaction as ITransaction } from "core/models";
 
 export const Transaction: FC<ITransaction> = ({
   description,
@@ -41,11 +24,13 @@ export const Transaction: FC<ITransaction> = ({
       <div className="flex-1">
         <p className="">{description}</p>
         <p className="text-sm text-gray-400">
-          {getDateFormated(date.toString())}
+          {TransactionFormatter.getDateFormated(date.toString())}
         </p>
       </div>
       <div>
-        <p className={`${color} font-bold`}>{getMoneyFormated(amount)}</p>
+        <p className={`${color} font-bold`}>
+          {TransactionFormatter.getMoneyFormated(amount)}
+        </p>
       </div>
     </div>
   );

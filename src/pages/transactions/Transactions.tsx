@@ -1,6 +1,6 @@
-import { Transaction } from "models";
 import { AutoCrud } from "components";
 import { TableView } from "./table-view";
+import { Transaction } from "core/models";
 import { CreateView } from "./create-view";
 
 export const Transactions = () => {

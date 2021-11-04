@@ -1,5 +1,5 @@
 import { links, Link as ILink } from "./links";
-import { useResize } from "commons/custom-hooks";
+import { useResize } from "custom-hooks";
 import { Link as LinkComponent } from "react-router-dom";
 import { useState, useLayoutEffect, useRef } from "react";
 import { Icon } from "components";

@@ -1,7 +1,7 @@
+import { useState } from "react";
 import { Nabvar } from "./navbar";
-import { useState, useEffect } from "react";
+import { useResize } from "custom-hooks";
 import { Accounts, Transactions } from "pages";
-import { useResize } from "commons/custom-hooks";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 export const Router = () => {

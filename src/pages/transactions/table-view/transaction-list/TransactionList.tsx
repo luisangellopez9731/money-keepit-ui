@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { Transaction } from "./Transaction";
-import { Transaction as ITransaction } from "models";
+import { Transaction as ITransaction } from "core/models";
 
 export interface TransactionListProps {
   transactions: ITransaction[];
