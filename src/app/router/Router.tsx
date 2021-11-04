@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Nabvar } from "./navbar";
+import { Navbar } from "./navbar";
 import { useResize } from "custom-hooks";
 import { Accounts, Transactions } from "pages";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
@@ -26,7 +26,7 @@ export const Router = () => {
           </Switch>
         </div>
         <div className="flex flex-grow-0 flex-shrink-0 w-full overflow-auto">
-          <Nabvar />
+          <Navbar />
         </div>
       </div>
     </BrowserRouter>

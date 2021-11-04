@@ -22,7 +22,7 @@ const Link = ({ icon, linkTo, text, showText }: LinkProps) => {
   );
 };
 
-export const Nabvar = () => {
+export const Navbar = () => {
   const [showText, setShowText] = useState(true);
   const navBarRef = useRef<HTMLDivElement>(null);
 
