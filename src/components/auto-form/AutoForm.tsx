@@ -14,17 +14,27 @@ export interface InputProps extends Field {
 export const Input: FC<InputProps> = ({ label, onChange, ...rest }) => {
   return (
     <div className="mb-4">
-      <label
-        className="block text-gray-700 text-sm font-bold mb-2"
-        htmlFor="username"
-      >
+      <label className="block font-bold mb-2" htmlFor="username">
         {label || ""}
       </label>
-      <input
-        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-        {...rest}
-        onChange={(e) => onChange(e.currentTarget.value)}
-      />
+      {rest.type === "select" ? (
+        <select
+          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          onChange={(e) => onChange(e.currentTarget.value)}
+        >
+          {rest.options?.map(({ text, value }, index) => (
+            <option value={value} key={index}>
+              {text}
+            </option>
+          ))}
+        </select>
+      ) : (
+        <input
+          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          {...rest}
+          onChange={(e) => onChange(e.currentTarget.value)}
+        />
+      )}
     </div>
   );
 };
@@ -54,8 +64,20 @@ export const AutoForm: FC<AutoFormProps> = ({ form, onSubmit, onCancel }) => {
           }}
         />
       ))}
-      <button type="submit">Submit</button>
-      <button onClick={onCancel_}>Cancel</button>
+      <div className="flex">
+        <button
+          className="rounded px-4 py-2 m-4 ml-0 bg-green-500 text-white flex-1"
+          type="submit"
+        >
+          Submit
+        </button>
+        <button
+          className="rounded px-4 py-2 m-4 mr-0 bg-red-500 text-white flex-1"
+          onClick={onCancel_}
+        >
+          Cancel
+        </button>
+      </div>
     </form>
   );
 };

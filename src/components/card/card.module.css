@@ -1,0 +1,27 @@
+.card {
+  position: relative;
+  transform: translateY(0);
+  /* animation: toTop .6s ease; */
+}
+
+.card:before {
+  top: 10px;
+  left: 0;
+  right: 0;
+  width: 30%;
+  height: 5px;
+  content: "";
+  margin: auto;
+  position: absolute;
+  border-radius: 50px;
+  background-color: rgba(128, 128, 128, 0.3);
+}
+
+@keyframes toTop {
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}

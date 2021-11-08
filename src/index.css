@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+  background: white;
+  font-family: "Poppins", sans-serif;
+  color: #0a163b;
+}
