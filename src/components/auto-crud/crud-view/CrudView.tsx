@@ -16,7 +16,7 @@ export const CrudView: FC<CrudViewProps> = ({
   const Title = typeof title == "string" ? <Header>{title}</Header> : title;
   return (
     <div className={`flex flex-col h-full w-full`}>
-      <div className={`header${noPaddingHeader ? "" : " px-4"}`}>{Title}</div>
+      <div className={`header${noPaddingHeader ? "" : " px-4"} pt-4`}>{Title}</div>
 
       <div
         className={`body flex-1 overflow-auto${noPadding ? "" : " p-4 pb-0"}`}
