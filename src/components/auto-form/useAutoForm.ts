@@ -1,11 +1,35 @@
 import { useState } from "react";
 
+export type FieldType =
+  | "button"
+  | "checkbox"
+  | "color"
+  | "date"
+  | "datetime-local"
+  | "email"
+  | "file"
+  | "hidden"
+  | "image"
+  | "month"
+  | "number"
+  | "password"
+  | "radio"
+  | "range"
+  | "search"
+  | "tel"
+  | "text"
+  | "time"
+  | "url"
+  | "week"
+  | "select";
+
 export interface Field {
-  type: string;
   value: string;
   label?: string;
-  placeholder?: string;
+  type: FieldType;
   autoFocus?: boolean;
+  placeholder?: string;
+  options?: { text: string; value: string | number }[];
 }
 
 export interface useAutoFormParams {

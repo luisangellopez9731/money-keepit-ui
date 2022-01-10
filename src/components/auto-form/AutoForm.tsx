@@ -20,11 +20,24 @@ export const Input: FC<InputProps> = ({ label, onChange, ...rest }) => {
       >
         {label || ""}
       </label>
-      <input
-        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-        {...rest}
-        onChange={(e) => onChange(e.currentTarget.value)}
-      />
+      {rest.type == "select" ? (
+        <select
+          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          onChange={(e) => onChange(e.currentTarget.value)}
+        >
+          {rest.options?.map(({ text, value }, index) => (
+            <option value={value} key={index}>
+              {text}
+            </option>
+          ))}
+        </select>
+      ) : (
+        <input
+          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          {...rest}
+          onChange={(e) => onChange(e.currentTarget.value)}
+        />
+      )}
     </div>
   );
 };
@@ -54,8 +67,14 @@ export const AutoForm: FC<AutoFormProps> = ({ form, onSubmit, onCancel }) => {
           }}
         />
       ))}
-      <button type="submit">Submit</button>
-      <button onClick={onCancel_}>Cancel</button>
+      <div className="flex w-full justify-between">
+        <button className="p-4 bg-blue-400 rounded" type="submit">
+          Submit
+        </button>
+        <button className="p-4 bg-red-500 rounded" onClick={onCancel_}>
+          Cancel
+        </button>
+      </div>
     </form>
   );
 };
