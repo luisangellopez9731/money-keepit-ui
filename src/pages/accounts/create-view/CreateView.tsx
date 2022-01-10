@@ -19,13 +19,13 @@ export const CreateView = () => {
       amount: {
         type: "number",
         value: "0",
-        label: "Initial Amount",
+        label: "Amount",
       },
       type: {
         type: "select",
         options: [
-          { text: "Income", value: "income" },
-          { text: "Expense", value: "expense" },
+          { text: "Income", value: 0 },
+          { text: "Expense", value: 1 },
         ],
         value: "income",
         label: "Type",
@@ -38,9 +38,9 @@ export const CreateView = () => {
   };
   return (
     <CrudView title="Create Account">
-      <Card>
+      <div className="px-4">
         <AutoForm form={form} onSubmit={onSubmit} />
-      </Card>{" "}
+      </div>
     </CrudView>
   );
 };

@@ -67,8 +67,14 @@ export const AutoForm: FC<AutoFormProps> = ({ form, onSubmit, onCancel }) => {
           }}
         />
       ))}
-      <button type="submit">Submit</button>
-      <button onClick={onCancel_}>Cancel</button>
+      <div className="flex w-full justify-between">
+        <button className="p-4 bg-blue-400 rounded" type="submit">
+          Submit
+        </button>
+        <button className="p-4 bg-red-500 rounded" onClick={onCancel_}>
+          Cancel
+        </button>
+      </div>
     </form>
   );
 };
