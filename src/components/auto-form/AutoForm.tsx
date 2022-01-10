@@ -14,13 +14,10 @@ export interface InputProps extends Field {
 export const Input: FC<InputProps> = ({ label, onChange, ...rest }) => {
   return (
     <div className="mb-4">
-      <label
-        className="block text-gray-700 text-sm font-bold mb-2"
-        htmlFor="username"
-      >
+      <label className="block font-bold mb-2" htmlFor="username">
         {label || ""}
       </label>
-      {rest.type == "select" ? (
+      {rest.type === "select" ? (
         <select
           className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           onChange={(e) => onChange(e.currentTarget.value)}
