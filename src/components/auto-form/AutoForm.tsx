@@ -5,6 +5,7 @@ export interface AutoFormProps {
   onSubmit?: () => void;
   onCancel?: () => void;
   form: useAutoFormResult;
+  hideCancelButton?: boolean;
 }
 
 export interface InputProps extends Field {
@@ -14,14 +15,11 @@ export interface InputProps extends Field {
 export const Input: FC<InputProps> = ({ label, onChange, ...rest }) => {
   return (
     <div className="mb-4">
-      <label className="block font-bold mb-2" htmlFor="username">
+      <label htmlFor="username">
         {label || ""}
       </label>
       {rest.type === "select" ? (
-        <select
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          onChange={(e) => onChange(e.currentTarget.value)}
-        >
+        <select onChange={(e) => onChange(e.currentTarget.value)}>
           {rest.options?.map(({ text, value }, index) => (
             <option value={value} key={index}>
               {text}
@@ -29,17 +27,18 @@ export const Input: FC<InputProps> = ({ label, onChange, ...rest }) => {
           ))}
         </select>
       ) : (
-        <input
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          {...rest}
-          onChange={(e) => onChange(e.currentTarget.value)}
-        />
+        <input {...rest} onChange={(e) => onChange(e.currentTarget.value)} />
       )}
     </div>
   );
 };
 
-export const AutoForm: FC<AutoFormProps> = ({ form, onSubmit, onCancel }) => {
+export const AutoForm: FC<AutoFormProps> = ({
+  form,
+  onSubmit,
+  onCancel,
+  hideCancelButton,
+}) => {
   const { fields, setField } = form;
   const onSubmit_ = (e: any) => {
     e.preventDefault();
@@ -65,12 +64,8 @@ export const AutoForm: FC<AutoFormProps> = ({ form, onSubmit, onCancel }) => {
         />
       ))}
       <div className="flex w-full justify-between">
-        <button className="p-4 bg-blue-400 rounded" type="submit">
-          Submit
-        </button>
-        <button className="p-4 bg-red-500 rounded" onClick={onCancel_}>
-          Cancel
-        </button>
+        <button type="submit">Submit</button>
+        {!hideCancelButton && <button onClick={onCancel_}>Cancel</button>}
       </div>
     </form>
   );

@@ -38,7 +38,7 @@ export const CreateView = () => {
   return (
     <CrudView title="Create Account">
       <div className="px-4">
-        <AutoForm form={form} onSubmit={onSubmit} />
+        <AutoForm form={form} onSubmit={onSubmit} hideCancelButton/>
       </div>
     </CrudView>
   );
