@@ -1,5 +1,14 @@
 import { FC } from "react";
-import { Header } from "components";
+import {
+  Paper,
+  Box,
+  Typography,
+  AppBar,
+  Button,
+  IconButton,
+  Toolbar,
+} from "@mui/material";
+import { Menu } from "@mui/icons-material";
 
 export interface CrudViewProps {
   title: React.ReactNode;
@@ -13,16 +22,31 @@ export const CrudView: FC<CrudViewProps> = ({
   noPadding,
   noPaddingHeader,
 }) => {
-  const Title = typeof title == "string" ? <Header>{title}</Header> : title;
   return (
-    <div className={`flex flex-col h-full w-full`}>
-      <div className={`header${noPaddingHeader ? "" : " px-4"} pt-4`}>{Title}</div>
+    <Paper style={{ height: "100%" }}>
+      {/* <Box mb={2} pt={2} pb={2}>
+        <Typography variant="h5">{title}</Typography>
+      </Box> */}
 
-      <div
-        className={`body flex-1 overflow-auto${noPadding ? "" : " p-4 pb-0"}`}
-      >
-        {children}
-      </div>
-    </div>
+      <AppBar position="static">
+        <Toolbar>
+          <IconButton
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            sx={{ mr: 2 }}
+          >
+            <Menu />
+          </IconButton>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            {title}
+          </Typography>
+          {/* <Button color="inherit">Login</Button> */}
+        </Toolbar>
+      </AppBar>
+
+      <Box ml={2} mr={2}>{children}</Box>
+    </Paper>
   );
 };

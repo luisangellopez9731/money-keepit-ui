@@ -1,5 +1,5 @@
-import { Card } from "components/card";
-import { AutoForm, useAutoForm, CrudView, Header } from "components";
+import { AutoForm, useAutoForm, CrudView } from "components";
+import { HorizontalFields } from "components/auto-form";
 
 export const CreateView = () => {
   const form = useAutoForm({
@@ -20,15 +20,6 @@ export const CreateView = () => {
         value: "0",
         label: "Amount",
       },
-      type: {
-        type: "select",
-        options: [
-          { text: "Income", value: 0 },
-          { text: "Expense", value: 1 },
-        ],
-        value: "income",
-        label: "Type",
-      },
     },
   });
 
@@ -37,8 +28,12 @@ export const CreateView = () => {
   };
   return (
     <CrudView title="Create Account">
-      <div className="px-4">
-        <AutoForm form={form} onSubmit={onSubmit} hideCancelButton/>
+      <div>
+        <AutoForm form={form} onSubmit={onSubmit}>
+          <HorizontalFields fields={["name"]} />
+          <HorizontalFields fields={["description"]} />
+          <HorizontalFields fields={["amount"]} />
+        </AutoForm>
       </div>
     </CrudView>
   );

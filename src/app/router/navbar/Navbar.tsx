@@ -1,54 +1,63 @@
-import { links, Link as ILink } from "./links";
-import { useResize } from "custom-hooks";
-import { Link as LinkComponent } from "react-router-dom";
-import { useState, useLayoutEffect, useRef } from "react";
-import { Icon } from "components";
-
-interface LinkProps extends ILink {
-  showText: boolean;
-}
-
-const Link = ({ icon, linkTo, text, showText }: LinkProps) => {
-  return (
-    <>
-      <LinkComponent
-        to={linkTo}
-        className="flex flex-col justify-center items-center p-4"
-      >
-        <Icon name={icon as any} />
-        {showText && <p className="text-sm">{text}</p>}
-      </LinkComponent>
-    </>
-  );
-};
+import {
+  AccountBalanceWallet,
+  Dashboard,
+  MoreVert,
+  SyncAlt,
+} from "@mui/icons-material";
+import { useState } from "react";
+import {
+  BottomNavigation,
+  BottomNavigationAction,
+  Box,
+  Paper,
+} from "@mui/material";
+import { Link, useHistory } from "react-router-dom";
 
 export const Navbar = () => {
-  const [showText, setShowText] = useState(true);
-  const navBarRef = useRef<HTMLDivElement>(null);
+  const history = useHistory();
+  const [value, setValue] = useState(0);
 
-  const setShowTextByWidth = () => {
-    if (navBarRef.current) {
-      if (navBarRef.current.scrollWidth > navBarRef.current.offsetWidth) {
-        setShowText(false);
-      } else {
-        setShowText(true);
-      }
-    }
-  };
-
-  useResize(setShowTextByWidth);
-
-  useLayoutEffect(() => {
-    setShowTextByWidth();
-  }, []);
   return (
-    <div
-      className="bg-white flex justify-around border-t-2 box-border w-full overflow-auto"
-      ref={navBarRef}
+    <Paper
+      sx={{ position: "fixed", bottom: 0, left: 0, right: 0 }}
+      elevation={3}
     >
-      {links.map((link) => (
-        <Link key={link.linkTo} {...link} showText={showText} />
-      ))}
-    </div>
+      <Box>
+        <BottomNavigation
+          showLabels
+          value={value}
+          onChange={(event, newValue) => {
+            console.log(newValue);
+            history.push(newValue);
+            setValue(newValue);
+          }}
+        >
+          <BottomNavigationAction
+            LinkComponent={Link}
+            label="Dashboard"
+            value="/"
+            icon={<Dashboard />}
+          />
+          <BottomNavigationAction
+            LinkComponent={Link}
+            label="Accounts"
+            value="/accounts"
+            icon={<AccountBalanceWallet />}
+          />
+          <BottomNavigationAction
+            LinkComponent={Link}
+            label="Transactions"
+            value="transactions"
+            icon={<SyncAlt />}
+          />
+          <BottomNavigationAction
+            LinkComponent={Link}
+            label="More"
+            value="/settings"
+            icon={<MoreVert />}
+          />
+        </BottomNavigation>
+      </Box>
+    </Paper>
   );
 };
