@@ -1,7 +1,10 @@
-import { AutoForm, useAutoForm, CrudView } from "components";
+import { ArrowBack, Menu } from "@mui/icons-material";
+import { AutoForm, useAutoForm, CrudView, useCrudView } from "components";
 import { HorizontalFields } from "components/auto-form";
+import { Link } from "react-router-dom";
 
 export const CreateView = () => {
+  const { path } = useCrudView();
   const form = useAutoForm({
     fields: {
       name: {
@@ -24,17 +27,19 @@ export const CreateView = () => {
   });
 
   const onSubmit = () => {
-    console.log(form.getValues());
   };
   return (
     <CrudView title="Create Account">
-      <div>
-        <AutoForm form={form} onSubmit={onSubmit}>
-          <HorizontalFields fields={["name"]} />
-          <HorizontalFields fields={["description"]} />
-          <HorizontalFields fields={["amount"]} />
-        </AutoForm>
-      </div>
+      <CrudView.LeftButton>
+        <Link to={`${path}`}>
+          <ArrowBack />
+        </Link>
+      </CrudView.LeftButton>
+      <AutoForm form={form} onSubmit={onSubmit}>
+        <HorizontalFields fields={["name"]} />
+        <HorizontalFields fields={["description"]} />
+        <HorizontalFields fields={["amount"]} />
+      </AutoForm>
     </CrudView>
   );
 };

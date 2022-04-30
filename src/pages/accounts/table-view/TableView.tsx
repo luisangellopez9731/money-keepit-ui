@@ -1,8 +1,14 @@
 import { FC } from "react";
-
-import { TableViewProps, CrudView } from "components/auto-crud";
+import { Link } from "react-router-dom";
+import { TableViewProps, CrudView, useCrudView } from "components/auto-crud";
 
 export const TableView: FC<TableViewProps> = ({ data }) => {
-  console.log(data);
-  return <CrudView title="accounts"></CrudView>;
+  const { path } = useCrudView();
+  return (
+    <CrudView title="Accounts">
+      <CrudView.RightButton>
+        <Link to={`${path}/create`}>Add</Link>
+      </CrudView.RightButton>
+    </CrudView>
+  );
 };

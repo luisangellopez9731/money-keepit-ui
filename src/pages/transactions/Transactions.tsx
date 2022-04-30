@@ -5,7 +5,7 @@ import { CreateView } from "./create-view";
 
 export const Transactions = () => {
   return (
-    <AutoCrud<Transaction>
+    <AutoCrud
       TableView={TableView}
       CreateView={CreateView}
       serviceName="transactions"

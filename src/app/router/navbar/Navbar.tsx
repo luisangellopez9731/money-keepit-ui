@@ -12,10 +12,12 @@ import {
   Paper,
 } from "@mui/material";
 import { Link, useHistory } from "react-router-dom";
+import { useWorkspaceContext } from "components";
 
 export const Navbar = () => {
   const history = useHistory();
   const [value, setValue] = useState(0);
+  const { workspaceId } = useWorkspaceContext();
 
   return (
     <Paper
@@ -27,7 +29,6 @@ export const Navbar = () => {
           showLabels
           value={value}
           onChange={(event, newValue) => {
-            console.log(newValue);
             history.push(newValue);
             setValue(newValue);
           }}
@@ -35,25 +36,25 @@ export const Navbar = () => {
           <BottomNavigationAction
             LinkComponent={Link}
             label="Dashboard"
-            value="/"
+            value={`/${workspaceId}`}
             icon={<Dashboard />}
           />
           <BottomNavigationAction
             LinkComponent={Link}
             label="Accounts"
-            value="/accounts"
+            value={`/${workspaceId}/accounts`}
             icon={<AccountBalanceWallet />}
           />
           <BottomNavigationAction
             LinkComponent={Link}
             label="Transactions"
-            value="transactions"
+            value={`/${workspaceId}/transactions`}
             icon={<SyncAlt />}
           />
           <BottomNavigationAction
             LinkComponent={Link}
             label="More"
-            value="/settings"
+            value={`/${workspaceId}/settings`}
             icon={<MoreVert />}
           />
         </BottomNavigation>

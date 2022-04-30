@@ -16,14 +16,12 @@ export const Router = () => {
     return <></>;
   }
   return (
-    <BrowserRouter>
-      <div style={{ height: `${height - bottomNavigationHeight}px` }}>
-        <Switch>
-          <Route path="/accounts" component={Accounts} />
-          <Route path="/transactions" component={Transactions} />
-        </Switch>
-        <Navbar />
-      </div>
-    </BrowserRouter>
+    <div style={{ height: `${height - bottomNavigationHeight}px` }}>
+      <Switch>
+        <Route path="/:workspaceId/accounts" component={Accounts} />
+        <Route path="/:workspaceId/transactions" component={Transactions} />
+      </Switch>
+      <Navbar />
+    </div>
   );
 };

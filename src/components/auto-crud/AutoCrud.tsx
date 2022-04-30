@@ -1,6 +1,16 @@
-import { FC } from "react";
-import { Route, Switch, useRouteMatch } from "react-router-dom";
+import { FC, createContext, useContext } from "react";
 import { useQuery, UseQueryResult } from "react-query";
+import { Route, Switch, useRouteMatch } from "react-router-dom";
+
+export interface AutoCrudContextValue {
+  path: string;
+}
+
+const AutoCrudContext = createContext<AutoCrudContextValue>({
+  path: "",
+});
+
+export const useAutoCrudContext = () => useContext(AutoCrudContext);
 
 export type TableViewProps = UseQueryResult;
 
@@ -11,29 +21,31 @@ export interface AutoCrudProps {
   serviceName: string;
 }
 
-export const AutoCrud = <T,>({
+export const AutoCrud = ({
   TableView,
   CreateView,
   EditView,
   serviceName,
 }: AutoCrudProps) => {
-  const result = useQuery<T[], Error>(serviceName, () =>
+  const result = useQuery<any, Error>(serviceName, () =>
     fetch(`${process.env.REACT_APP_BACKEND_URL}${serviceName}`).then((res) =>
       res.json()
     )
   );
-  const { path: basePath } = useRouteMatch();
+  const { path: basePath, url } = useRouteMatch();
   return (
-    <Switch>
-      <Route path={`${basePath}/create`}>
-        <CreateView />
-      </Route>
-      <Route path={`${basePath}/:id`}>
-        <EditView />
-      </Route>
-      <Route path={`${basePath}`}>
-        <TableView {...result} />
-      </Route>
-    </Switch>
+    <AutoCrudContext.Provider value={{ path: url }}>
+      <Switch>
+        <Route path={`${basePath}/create`}>
+          <CreateView />
+        </Route>
+        <Route path={`${basePath}/:id`}>
+          <EditView />
+        </Route>
+        <Route path={`${basePath}/`}>
+          <TableView {...result} />
+        </Route>
+      </Switch>
+    </AutoCrudContext.Provider>
   );
 };
