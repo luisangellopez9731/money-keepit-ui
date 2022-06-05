@@ -12,12 +12,12 @@ import {
   Paper,
 } from "@mui/material";
 import { Link, useHistory } from "react-router-dom";
-import { useWorkspaceContext } from "components";
+import { useWorkspace } from "components";
 
 export const Navbar = () => {
   const history = useHistory();
   const [value, setValue] = useState(0);
-  const { workspaceId } = useWorkspaceContext();
+  const { workspaceId } = useWorkspace();
 
   return (
     <Paper

@@ -1,2 +1,3 @@
-export * from "./AutoCrud";
-export * from "./crud-view";
+export * from './useCrud';
+export * from './AutoCrud';
+export * from './crud-view';

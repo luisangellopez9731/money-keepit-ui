@@ -1,10 +1,12 @@
-import { ArrowBack, Menu } from "@mui/icons-material";
-import { AutoForm, useAutoForm, CrudView, useCrudView } from "components";
+import { ArrowBack } from "@mui/icons-material";
+import { AutoForm, useAutoForm, CrudView, useCrudView, useCrud } from "components";
 import { HorizontalFields } from "components/auto-form";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 export const CreateView = () => {
-  const { path } = useCrudView();
+  const { path } = useCrudView()
+  const { dataProvider, reactQueryIds } = useCrud();
+  const history = useHistory()
   const form = useAutoForm({
     fields: {
       name: {
@@ -26,15 +28,21 @@ export const CreateView = () => {
     },
   });
 
-  const onSubmit = () => {
+  const onSubmit = async () => {
+    try {
+      await dataProvider.create({ ...form.getValues() })
+      history.push(path)
+    } catch (err) {
+      console.log(err)
+    }
   };
   return (
     <CrudView title="Create Account">
-      <CrudView.LeftButton>
+      {/* <CrudView.LeftButton>
         <Link to={`${path}`}>
           <ArrowBack />
         </Link>
-      </CrudView.LeftButton>
+      </CrudView.LeftButton> */}
       <AutoForm form={form} onSubmit={onSubmit}>
         <HorizontalFields fields={["name"]} />
         <HorizontalFields fields={["description"]} />

@@ -12,7 +12,9 @@ const AutoCrudContext = createContext<AutoCrudContextValue>({
 
 export const useAutoCrudContext = () => useContext(AutoCrudContext);
 
-export type TableViewProps = UseQueryResult;
+export interface TableViewProps {
+
+};
 
 export interface AutoCrudProps {
   EditView: FC;
@@ -27,11 +29,6 @@ export const AutoCrud = ({
   EditView,
   serviceName,
 }: AutoCrudProps) => {
-  const result = useQuery<any, Error>(serviceName, () =>
-    fetch(`${process.env.REACT_APP_BACKEND_URL}${serviceName}`).then((res) =>
-      res.json()
-    )
-  );
   const { path: basePath, url } = useRouteMatch();
   return (
     <AutoCrudContext.Provider value={{ path: url }}>
@@ -43,7 +40,7 @@ export const AutoCrud = ({
           <EditView />
         </Route>
         <Route path={`${basePath}/`}>
-          <TableView {...result} />
+          <TableView />
         </Route>
       </Switch>
     </AutoCrudContext.Provider>

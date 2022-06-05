@@ -3,7 +3,7 @@ import fetchIntercept from "fetch-intercept";
 
 const WorkspaceContext = createContext<any>({});
 
-export const useWorkspaceContext = () => useContext(WorkspaceContext);
+export const useWorkspace = () => useContext(WorkspaceContext);
 export const WorkspaceProvider: FC = ({ children }) => {
   const [workspaceId, setWorkspaceId] = useState("test");
   useEffect(() => {
@@ -12,19 +12,19 @@ export const WorkspaceProvider: FC = ({ children }) => {
       window.location.replace(`http://${window.location.host}/${workspaceId}${window.location.pathname}`);
     }
 
-    const unregister = fetchIntercept.register({
-      request: function (url, config) {
-        const urlObject = new URL(url);
-        return [
-          `${urlObject.origin}/${workspaceId}${urlObject.pathname}`,
-          config,
-        ];
-      },
-    });
+    // const unregister = fetchIntercept.register({
+    //   request: function (url, config) {
+    //     const urlObject = new URL(url);
+    //     return [
+    //       `${urlObject.origin}/${workspaceId}${urlObject.pathname}`,
+    //       config,
+    //     ];
+    //   },
+    // });
 
-    return () => {
-      unregister();
-    };
+    // return () => {
+    //   unregister();
+    // };
   }, []);
   return (
     <WorkspaceContext.Provider value={{ workspaceId }}>

@@ -8,10 +8,9 @@ import {
   IconButton,
   Toolbar,
 } from "@mui/material";
-import { Menu } from "@mui/icons-material";
-import { fchownSync } from "fs";
-import { useAutoCrudContext } from "../AutoCrud";
 import { useRouteMatch } from "react-router";
+import { useAutoCrudContext } from "../AutoCrud";
+import { Menu } from './Menu'
 
 export interface CrudViewProps {
   title: React.ReactNode;
@@ -19,7 +18,7 @@ export interface CrudViewProps {
   noPaddingHeader?: boolean;
 }
 
-export interface RightButtonProps {}
+export interface RightButtonProps { }
 
 export interface CrudViewSubComponents {
   RightButton: FC<RightButtonProps>;
@@ -34,8 +33,6 @@ export const LeftButton: ButtonComponent = () => null;
 export const CrudView: FC<CrudViewProps> & CrudViewSubComponents = ({
   title,
   children,
-  noPadding,
-  noPaddingHeader,
 }) => {
   const { url } = useRouteMatch();
   const [leftButton, setLeftButton] = useState<any>(null);
@@ -43,16 +40,17 @@ export const CrudView: FC<CrudViewProps> & CrudViewSubComponents = ({
   useEffect(() => {
     const rightButtons_: ButtonComponent[] = [];
     Children.forEach(children, (Child) => {
+      console.log((Child as any).type?.name)
       if (
         Child &&
         (Child as any).type?.name &&
-        RightButton.name == (Child as any).type?.name
+        RightButton.name === (Child as any).type?.name
       ) {
         rightButtons_.push(Child as ButtonComponent);
       } else if (
         Child &&
         (Child as any).type?.name &&
-        LeftButton.name == (Child as any).type?.name
+        LeftButton.name === (Child as any).type?.name
       ) {
         setLeftButton((Child as any).props.children);
       }
@@ -61,23 +59,29 @@ export const CrudView: FC<CrudViewProps> & CrudViewSubComponents = ({
     });
   }, [url]);
   return (
-    <Paper style={{ height: "100%" }}>
-      {/* <Box mb={2} pt={2} pb={2}>
-        <Typography variant="h5">{title}</Typography>
-      </Box> */}
-
+    <Paper style={{
+      position: 'relative',
+      height: "100%",
+      display: 'flex',
+      flexFlow: 'column',
+      justifyContent: 'flex-start',
+      alignItems: 'flex-start'
+    }}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
-          >
-            {leftButton != null ? leftButton : <Menu />}
-          </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          {leftButton != null ?
+            <IconButton
+              size="large"
+              edge="start"
+              color="inherit"
+              aria-label="menu"
+              sx={{ mr: 2 }}
+            >
+              leftButton
+            </IconButton>
+            : <Menu />}
+
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }} style={{textAlign: 'center'}}>
             {title}
           </Typography>
           {rightButtons.map((Element, index) => {
@@ -89,9 +93,10 @@ export const CrudView: FC<CrudViewProps> & CrudViewSubComponents = ({
           })}
         </Toolbar>
       </AppBar>
-
-      <Box ml={2} mr={2}>
-        {children}
+      <Box position="relative" flex="1 1 auto" width="100%" minHeight={0} overflow="auto">
+        <Box boxSizing="border-box" width="calc(100% - 16px)" height="calc(100% - 16px)" m={1} overflow="auto">
+          {children}
+        </Box>
       </Box>
     </Paper>
   );
@@ -103,5 +108,5 @@ export const useCrudView = () => {
   return { path };
 };
 
-CrudView.RightButton = RightButton;
 CrudView.LeftButton = LeftButton;
+CrudView.RightButton = RightButton;
